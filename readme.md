@@ -1,6 +1,6 @@
 # Modern LLM Training Framework
 
-A production-ready, scalable framework for training large language models from scratch. Includes state-of-the-art architectural improvements and supports training on everything from a single CPU to multi-node GPU clusters.
+An Experimental, scalable framework for training large language models from scratch. Includes state-of-the-art architectural improvements and supports training on everything from a single CPU to multi-node GPU clusters.
 
 ## 🌟 Features
 
