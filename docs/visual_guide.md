@@ -241,8 +241,7 @@ python train.py \
     --max_steps 100000 \
     --learning_rate 3e-4 \
     --warmup_steps 2000 \
-    --mixed_precision \
-    --wandb_project my_llm_experiment
+    --mixed_precision  
 
 # Monitor progress:
 # Step 1000/100000 | Loss: 7.2341 | Tokens/sec: 8432
@@ -302,8 +301,7 @@ torchrun --nproc_per_node=4 train.py \
     --learning_rate 3e-4 \
     --warmup_steps 5000 \
     --mixed_precision \
-    --compile_model \
-    --wandb_project big_llm_experiment
+    --compile_model  
 
 # You'll see:
 # [Rank 0] Device: cuda:0
@@ -455,8 +453,7 @@ python train.py \
     --batch_size 32 \
     --max_steps 100000 \
     --learning_rate 3e-4 \
-    --mixed_precision \
-    --wandb_project medical_llm
+    --mixed_precision 
 ```
 
 **Expected Outcome:**
@@ -502,27 +499,22 @@ Step 150000: New checkpoint
 **Experiment 1: Learning Rate**
 ```bash
 # Try different learning rates
-python train.py --learning_rate 1e-4 --wandb_run_name lr_1e4
-python train.py --learning_rate 3e-4 --wandb_run_name lr_3e4
-python train.py --learning_rate 6e-4 --wandb_run_name lr_6e4
-
-# Compare in WandB dashboard
-# Best is usually the one with:
-# - Smooth loss curve
-# - Lowest final validation loss
-# - No training instabilities
+python train.py --learning_rate 1e-4  
+python train.py --learning_rate 3e-4  
+python train.py --learning_rate 6e-4  
+ 
 ```
 
 **Experiment 2: Model Size**
 ```bash
 # Small
-python train.py --hidden_size 512 --num_layers 8 --wandb_run_name small
+python train.py --hidden_size 512 --num_layers 8  
 
 # Medium
-python train.py --hidden_size 768 --num_layers 12 --wandb_run_name medium
+python train.py --hidden_size 768 --num_layers 12  
 
 # Large
-python train.py --hidden_size 1024 --num_layers 16 --wandb_run_name large
+python train.py --hidden_size 1024 --num_layers 16 
 
 # Compare:
 # - Training time

@@ -21,8 +21,7 @@ This is a modern, scalable LLM training framework with state-of-the-art features
 - ✅ Gradient clipping
 - ✅ Cosine learning rate schedule with warmup
 - ✅ AdamW optimizer with proper weight decay
-- ✅ Checkpointing and resuming
-- ✅ Wandb integration for experiment tracking
+- ✅ Checkpointing and resuming 
 - ✅ PyTorch 2.0 torch.compile support
 
 ## Installation
@@ -210,15 +209,7 @@ Enable torch.compile for additional speedup:
 ```bash
 --compile_model
 ```
-
-### Experiment Tracking
-
-Enable Weights & Biases logging:
-
-```bash
---wandb_project my_llm_project --wandb_run_name experiment_1
-```
-
+ 
 ## Project Structure
 
 ```
@@ -247,8 +238,7 @@ Enable Weights & Biases logging:
 ## Monitoring
 
 Check training progress:
-- Console logs show loss, learning rate, and throughput
-- Wandb dashboard for comprehensive metrics
+- Console logs show loss, learning rate, and throughput 
 - Validation loss every `--eval_interval` steps
 
 ## Troubleshooting

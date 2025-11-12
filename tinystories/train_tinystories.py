@@ -407,8 +407,7 @@ def main():
     parser.add_argument("--learning_rate", type=float, default=3e-4)
     
     # System
-    parser.add_argument("--no_mixed_precision", action="store_true")
-    parser.add_argument("--no_wandb", action="store_true")
+    parser.add_argument("--no_mixed_precision", action="store_true") 
     
     # Checkpointing
     parser.add_argument("--save_interval", type=int, default=100)

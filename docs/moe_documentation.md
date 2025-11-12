@@ -430,8 +430,7 @@ python train_moe.py \
     --learning_rate 1e-4 \
     --warmup_steps 10000 \
     --mixed_precision \
-    --compile_model \
-    --wandb_project mixtral_replica
+    --compile_model  
 ```
 
 **Result**: ~46B total params, ~12B active
@@ -762,8 +761,7 @@ python train_moe.py \
     --max_steps 500000 \
     --learning_rate 2e-4 \
     --aux_loss_weight 0.01 \
-    --mixed_precision \
-    --wandb_project mixtral_style \
+    --mixed_precision  
     --log_expert_stats
 ```
 
@@ -904,16 +902,7 @@ Expert Statistics:
   - Higher is better
   - > 2.0: Well balanced
   - < 1.5: Poorly balanced
-
-### WandB Dashboard
-
-When using `--log_expert_stats`, you'll see:
-- Expert usage over time
-- Load balancing effectiveness
-- Per-expert activation rates
-- Router confidence scores
-
----
+ 
 
 ## Model Size Comparison
 
@@ -998,22 +987,9 @@ python train_moe.py \
     --num_experts 8 \
     --max_steps 500000
 ```
+ 
 
-### 2. Monitor Expert Balance
-
-```bash
-# Always use --log_expert_stats
-python train_moe.py \
-    --log_expert_stats \
-    --wandb_project my_moe
-```
-
-Check WandB for:
-- Expert usage distribution (should be roughly uniform)
-- Router entropy (should be high)
-- No "dead" experts (usage near zero)
-
-### 3. Tune Auxiliary Loss Weight
+### 2. Tune Auxiliary Loss Weight
 
 ```bash
 # If experts are imbalanced, increase aux_loss_weight
@@ -1022,7 +998,7 @@ Check WandB for:
 --aux_loss_weight 0.1    # Too high, hurts performance
 ```
 
-### 4. Choose Number of Experts Wisely
+### 3. Choose Number of Experts Wisely
 
 **For given compute budget:**
 - More experts = more capacity
@@ -1035,7 +1011,7 @@ Check WandB for:
 - Large models (10-100B): 16-32 experts
 - Very large (100B+): 64+ experts
 
-### 5. Expert Capacity
+### 4. Expert Capacity
 
 MoE can have capacity issues if too many tokens route to one expert:
 

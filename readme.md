@@ -18,8 +18,7 @@ An Experimental, scalable framework for training large language models from scra
 - ✅ Multi-node distributed training
 - ✅ Mixed precision training (FP16/BF16)
 - ✅ Gradient accumulation
-- ✅ Automatic checkpointing
-- ✅ WandB integration
+- ✅ Automatic checkpointing 
 - ✅ PyTorch 2.0 compile support
 
 ### Data Processing
@@ -108,12 +107,7 @@ torchrun --nproc_per_node=4 train.py \
 ```bash
 # Watch training progress
 python utils.py monitor --checkpoint_dir ./checkpoints
-
-# Or use WandB (recommended)
-python train.py \
-    --wandb_project my_llm \
-    --wandb_run_name experiment_1 \
-    [other args...]
+ 
 ```
 
 ## 📚 Documentation
@@ -197,9 +191,7 @@ llm_training/
 ```
 
 **Logging:**
-```bash
---wandb_project      # WandB project name
---wandb_run_name     # WandB run name
+```bash 
 --log_interval       # Steps between logs (default: 100)
 --eval_interval      # Steps between validation (default: 500)
 --

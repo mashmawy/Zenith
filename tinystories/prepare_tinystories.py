@@ -178,9 +178,8 @@ def main():
     print("✅ Data preparation complete!")
     print("="*60)
     print("\nNext steps:")
-    print("1. Run: python train_tinystories.py")
-    print("2. Monitor training with WandB")
-    print("3. Generate stories with trained model")
+    print("1. Run: python train_tinystories.py") 
+    print("2. Generate stories with trained model")
 
 
 if __name__ == "__main__":

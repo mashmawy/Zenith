@@ -48,8 +48,7 @@ pip install torch torchvision torchaudio --index-url https://download.pytorch.or
 pip install transformers>=4.36.0
 pip install datasets>=2.14.0
 pip install tokenizers>=0.13.0
-pip install accelerate>=0.24.0
-pip install wandb
+pip install accelerate>=0.24.0 
 pip install tqdm
 ```
 
@@ -251,9 +250,8 @@ def main():
     print("✅ Data preparation complete!")
     print("="*60)
     print("\nNext steps:")
-    print("1. Run: python train_tinystories.py")
-    print("2. Monitor training with WandB")
-    print("3. Generate stories with trained model")
+    print("1. Run: python train_tinystories.py") 
+    print("2. Generate stories with trained model")
 
 
 if __name__ == "__main__":
@@ -277,9 +275,7 @@ from datasets import load_from_disk
 from tokenizers import Tokenizer
 import os
 import json
-from tqdm import tqdm
-import wandb
-
+from tqdm import tqdm 
 # Import your model
 from model import LLMModel, ModelConfig
 
@@ -310,8 +306,7 @@ class TinyStoriesTrainer:
         device="cuda" if torch.cuda.is_available() else "cpu",
         mixed_precision=True,
         
-        # Logging
-        use_wandb=True,
+        # Logging 
         log_interval=100,
         eval_interval=1000,
         save_interval=100,  # Save every 100 steps!
@@ -369,21 +364,7 @@ class TinyStoriesTrainer:
             self.scaler = torch.cuda.amp.GradScaler()
         else:
             self.scaler = None
-        
-        # WandB
-        self.use_wandb = use_wandb
-        if use_wandb:
-            wandb.init(
-                project="tinystories-training",
-                config={
-                    "hidden_size": hidden_size,
-                    "num_layers": num_layers,
-                    "batch_size": batch_size,
-                    "learning_rate": learning_rate,
-                    "max_steps": max_steps,
-                },
-                resume="allow"  # Allow resuming WandB runs
-            )
+    
         
         print("\n" + "="*60)
         print("TinyStories Training Configuration")
@@ -645,14 +626,7 @@ class TinyStoriesTrainer:
                           f"Loss: {avg_loss:.4f} | "
                           f"LR: {lr:.2e} | "
                           f"Tokens/s: {tokens_per_sec:,.0f}")
-                    
-                    if wandb.run is not None:
-                        wandb.log({
-                            'train/loss': avg_loss,
-                            'train/lr': lr,
-                            'train/tokens_per_sec': tokens_per_sec,
-                            'step': self.step
-                        })
+                     
                     
                     losses = []
                     start_time = time.time()
@@ -682,9 +656,7 @@ class TinyStoriesTrainer:
                         print(f"⭐ New best model! Validation loss: {val_loss:.4f}")
                     else:
                         print(f"📊 Validation loss: {val_loss:.4f} (best: {self.best_val_loss:.4f})")
-                    
-                    if wandb.run is not None:
-                        wandb.log({'val/loss': val_loss, 'val/best_loss': self.best_val_loss, 'step': self.step})
+                     
                 
                 # Save checkpoint
                 if self.step % self.save_interval == 0:
@@ -737,9 +709,7 @@ def main():
     
     # System
     parser.add_argument("--no_mixed_precision", action="store_true",
-                        help="Disable mixed precision training")
-    parser.add_argument("--no_wandb", action="store_true",
-                        help="Disable Weights & Biases logging")
+                        help="Disable mixed precision training") 
     
     # Checkpointing
     parser.add_argument("--save_interval", type=int, default=100, 
@@ -771,8 +741,7 @@ def main():
         batch_size=args.batch_size,
         max_steps=args.max_steps,
         learning_rate=args.learning_rate,
-        mixed_precision=not args.no_mixed_precision,
-        use_wandb=not args.no_wandb,
+        mixed_precision=not args.no_mixed_precision, 
         save_interval=args.save_interval,
         keep_last_n_checkpoints=args.keep_checkpoints,
     )
@@ -797,16 +766,12 @@ def main():
         print("\n\n⚠️  Training interrupted by user!")
         print("Saving checkpoint before exit...")
         trainer.save_checkpoint()
-        print("✅ Checkpoint saved. You can resume with --resume flag")
-        if wandb.run is not None:
-            wandb.finish()
+        print("✅ Checkpoint saved. You can resume with --resume flag") 
     except Exception as e:
         print(f"\n\n❌ Error during training: {e}")
         print("Saving checkpoint before exit...")
         trainer.save_checkpoint()
-        print("✅ Checkpoint saved")
-        if wandb.run is not None:
-            wandb.finish()
+        print("✅ Checkpoint saved") 
         raise
 
 
@@ -1049,11 +1014,10 @@ Bella smiled. "I know where it is! Follow me!" Together, they walked deeper into
 ## Tips for Best Results
 
 1. **Start Small**: Train tiny model first to verify pipeline works
-2. **Monitor Loss**: Should decrease to ~2.5-3.0
-3. **Use WandB**: Track experiments and compare runs
-4. **Checkpoint Often**: Save every 5,000 steps
-5. **Generate During Training**: Test quality at different steps
-6. **Temperature**: Lower (0.7) = more coherent, Higher (0.9) = more creative
+2. **Monitor Loss**: Should decrease to ~2.5-3.0 
+3. **Checkpoint Often**: Save every 5,000 steps
+4. **Generate During Training**: Test quality at different steps
+5. **Temperature**: Lower (0.7) = more coherent, Higher (0.9) = more creative
 
 ---
 

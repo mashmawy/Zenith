@@ -117,9 +117,7 @@ This installs all the libraries (pre-written code) that our framework needs.
 **What gets installed:**
 - `torch`: PyTorch - the main deep learning library
 - `tokenizers`: Converts text to numbers
-- `datasets`: Manages training data
-- `wandb`: Tracks experiments (optional but useful)
-
+- `datasets`: Manages training data 
 ⏱️ This may take 5-15 minutes depending on your internet speed.
 
 ---
@@ -365,12 +363,7 @@ python train.py \
   - PyTorch 2.0+ optimization
   - Additional 10-20% speedup
   - Only works with PyTorch 2.0+
-
-**Logging:**
-- `--wandb_project my_project`
-  - Track experiments online
-  - Sign up at wandb.ai (free)
-  - Very useful for monitoring
+ 
 
 **What you'll see:**
 ```
@@ -406,14 +399,7 @@ Validation Loss: 7.6543
 **In Terminal:**
 - Loss should decrease over time
 - If loss increases consistently, something is wrong
-
-**Using WandB (Recommended):**
-1. Sign up at https://wandb.ai
-2. Get API key from settings
-3. Run: `wandb login` and paste key
-4. Add to training command: `--wandb_project my_first_llm`
-5. Open browser to see real-time charts
-
+ 
 **Checkpoints:**
 Every `--save_interval` steps (default 1000), a checkpoint is saved:
 ```
