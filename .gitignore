@@ -1,0 +1,13 @@
+# Python cache
+__pycache__/
+*.pyc
+
+# IDE specific
+.vscode/
+
+# Data, models, and media
+processed_data/
+tinystories/tinystories_model/
+tinystories/tinystories_processed/
+tinystories/tinystories_tokenizer/
+media/
