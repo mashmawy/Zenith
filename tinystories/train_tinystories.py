@@ -100,7 +100,7 @@ class TinyStoriesTrainer:
         self.setup_optimizer()
         
         if mixed_precision and self.device.type == "cuda":
-            self.scaler = torch.cuda.amp.GradScaler()
+            self.scaler = torch.cuda.amp.GradScaler("cuda")
         else:
             self.scaler = None
          
