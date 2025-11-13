@@ -400,7 +400,9 @@ def main():
     # Model
     parser.add_argument("--hidden_size", type=int, default=384)
     parser.add_argument("--num_layers", type=int, default=6)
-    
+    parser.add_argument("--num_heads", type=int, default=6)
+    parser.add_argument("--warmup_steps", type=int, default=1000)
+       
     # Training
     parser.add_argument("--batch_size", type=int, default=32)
     parser.add_argument("--max_steps", type=int, default=50000)
@@ -408,7 +410,7 @@ def main():
     
     # System
     parser.add_argument("--no_mixed_precision", action="store_true") 
-    
+  
     # Checkpointing
     parser.add_argument("--save_interval", type=int, default=100)
     parser.add_argument("--keep_checkpoints", type=int, default=10)
@@ -435,6 +437,8 @@ def main():
         mixed_precision=not args.no_mixed_precision, 
         save_interval=args.save_interval,
         keep_last_n_checkpoints=args.keep_checkpoints,
+        num_heads=args.num_heads,
+        warmup_steps=args.warmup_steps
     )
     
     # Resume if requested
